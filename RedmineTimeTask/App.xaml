@@ -1,0 +1,10 @@
+﻿<Application x:Class="RedmineTimeTask.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:RedmineTimeTask"
+             xmlns:properties="clr-namespace:RedmineTimeTask.Properties"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <properties:Settings x:Key="Settings" />
+    </Application.Resources>
+</Application>
