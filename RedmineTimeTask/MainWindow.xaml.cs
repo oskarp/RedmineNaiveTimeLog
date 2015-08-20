@@ -27,11 +27,12 @@ namespace RedmineTimeTask
     /// </summary>
     public partial class MainWindow : Window
     {
+        RequestProxy rp = new RequestProxy();
+
         public MainWindow()
         {
             InitializeComponent();
 
-            RequestProxy rp = new RequestProxy();
             // Put on its own thread later. 
             rp.fetchIssues();
             issues_ListBox.ItemsSource = rp.Issues;
@@ -42,5 +43,24 @@ namespace RedmineTimeTask
             Settings settingsWindow = new Settings();
             settingsWindow.Show();
         }
+
+        private void about_Menu(object sender, RoutedEventArgs e)
+        {
+            about aboutWindow = new about();
+            aboutWindow.Show();
+        }
+
+        private void startWatch_Menu(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void ForceRefresh_Menu(object sender, RoutedEventArgs e)
+        {
+            rp.fetchIssues();
+            issues_ListBox.ItemsSource = rp.Issues;
+
+        }
     }
 }
+                                                                                      

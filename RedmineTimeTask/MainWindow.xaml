@@ -5,34 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RedmineTimeTask"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    
+        Title="MainWindow" Height="450" Width="600">
+
     <Grid>
 
 
-        <DockPanel>
-            <Menu DockPanel.Dock="Top">
+        <DockPanel LastChildFill="False">
+            <Menu DockPanel.Dock="Top" Background="#FFC3C3C3">
                 <MenuItem Header="_Menu">
                     <MenuItem Header="_Settings" Click="settings_Menu"/>
-                    <MenuItem Header="_Close"/>
-                    <MenuItem Header="_Save"/>
+                    <MenuItem Header="_About" Click="about_Menu"/>
+                    <MenuItem Header="_Force Refresh" Click="ForceRefresh_Menu"/>
                 </MenuItem>
             </Menu>
-            <StackPanel></StackPanel>
+            <ListBox x:Name="issues_ListBox" ItemsSource="{Binding}"  Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Top" BorderThickness="0">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,5">
+                            <DockPanel LastChildFill="False">
+                                <TextBlock Text="{Binding Subject}" DockPanel.Dock="Left" FontWeight="Bold" FontSize="16" />
+
+                                <TextBlock Text="{Binding Project}" DockPanel.Dock="Right" />
+                            </DockPanel>
+                            <DockPanel LastChildFill="False">
+
+                                <TextBlock Text="{Binding DueDate}" DockPanel.Dock="Right"></TextBlock>
+                                <TextBlock Text=" - Due date: " DockPanel.Dock="Right" />
+                                <TextBlock Text="{Binding SpentHours}" DockPanel.Dock="Right" />
+                                <TextBlock Text="Spent Hours: " DockPanel.Dock="Right" />
+
+                            </DockPanel>
+                        </StackPanel>
+                        <!--
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <DockPanel Grid.Column="0">
+                            <TextBlock Text="{Binding Subject}" />
+                            </DockPanel>
+                            <DockPanel Grid.Column="1">
+                                <TextBlock Text="{Binding Project}" DockPanel.Dock="Right"/>
+                            </DockPanel>
+                        </Grid>
+                        -->
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </DockPanel>
-        <ListBox x:Name="issues_ListBox" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="245" Margin="0,20,0,0" VerticalAlignment="Top" Width="Auto">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="4">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" SharedSizeGroup="Subject" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding Subject}" />
-                        <TextBlock Grid.Column="1" Text="{Binding Project}" />
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+
     </Grid>
 </Window>

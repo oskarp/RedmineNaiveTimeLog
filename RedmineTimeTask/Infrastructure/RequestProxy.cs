@@ -26,14 +26,16 @@ namespace RedmineTimeTask.Infrastructure
                 _issues = value;
             }
         }
-
+        
         public void fetchIssues()
         {
-            var manager = new RedmineManager(Properties.Settings.Default.Host, Properties.Settings.Default.APIkey);
-
-            var parameters = new NameValueCollection { { "assigned_to_id", "me" } };
-            parameters.Add("status_id", "open");
-            this.Issues = manager.GetObjectList<Issue>(parameters);
+            if(Properties.Settings.Default.Host.Length != 0 && Properties.Settings.Default.APIkey.Length != 0) { 
+                var manager = new RedmineManager(Properties.Settings.Default.Host, Properties.Settings.Default.APIkey);
+                
+                var parameters = new NameValueCollection { { "assigned_to_id", "*" } };
+                parameters.Add("status_id", "open");
+                this.Issues = manager.GetObjectList<Issue>(parameters);
+            }
         }
     }
 }
