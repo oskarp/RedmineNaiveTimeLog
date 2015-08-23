@@ -5,13 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RedmineTimeTask"
         mc:Ignorable="d"
-        Title="SubmitTime" Height="191" Width="300">
+        ResizeMode="NoResize"
+        Title="SubmitTime" Height="237.508" Width="309.814">
     <Grid Margin="0,0,0,4">
-        <TextBox x:Name="hours_box" HorizontalAlignment="Left" Height="23" Margin="83,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199"/>
-        <ComboBox x:Name="issues_Box" HorizontalAlignment="Left" Margin="83,48,0,0" VerticalAlignment="Top" Width="199" Loaded="issues_BoxLoaded" DisplayMemberPath="Subject"/>
-        <Label x:Name="label" Content="Issue" HorizontalAlignment="Left" Margin="8,48,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy" Content="Hours spent" HorizontalAlignment="Left" Margin="8,84,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button" Content="Submit" HorizontalAlignment="Left" Margin="207,125,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <ComboBox x:Name="activities_Box" HorizontalAlignment="Left" Margin="83,39,0,0" VerticalAlignment="Top" Width="199" DisplayMemberPath="Name"/>
+        <TextBox x:Name="hours_box" HorizontalAlignment="Left" Height="23" Margin="83,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" IsEnabled="False"/>
+        <ComboBox x:Name="issues_Box" HorizontalAlignment="Left" Margin="83,12,0,0" VerticalAlignment="Top" Width="199" Loaded="issues_BoxLoaded" SelectionChanged="issues_Box_SelectionChanged"  DisplayMemberPath="Subject"/>
+        <Label x:Name="label" Content="Issue" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.665,0.478"/>
+        <Label x:Name="label_Copy" Content="Hours spent" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button" Content="Submit" HorizontalAlignment="Left" Margin="207,172,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <Label x:Name="label_Copy1" Content="Activity" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy2" Content="Comment" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="comment_Box" HorizontalAlignment="Left" Height="60" Margin="83,93,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" MaxLength="255" Width="199"/>
 
     </Grid>
 </Window>

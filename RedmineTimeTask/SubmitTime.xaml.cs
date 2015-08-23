@@ -39,6 +39,12 @@ namespace RedmineTimeTask
 
             //fhours_box.Text = te.Timespan.TotalHours.ToString();
         }
+
+        public void activities_BoxLoaded(object sender, RoutedEventArgs e) {
+
+            // activities_Box.ItemsSource = rp.getActivitiesForProject
+        }
+
         internal RequestProxy Rp
         {
             get
@@ -68,10 +74,19 @@ namespace RedmineTimeTask
         private void button_Click(object sender, RoutedEventArgs e)
         {
             te.Issue = (Issue)issues_Box.SelectedItem;
-            
-            MessageBox.Show("Sending in " + Math.Round((decimal)te.Timespan.TotalHours, 3).ToString() + " for issue " + te.Issue.Id.ToString());
 
+            te.Activity = ((TimeEntryActivity)activities_Box.SelectedItem).Id;
+            te.Comment = comment_Box.Text;        
             rp.submitTime(te);
+            Close();
+        }
+
+        private void issues_Box_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            te.Issue = (Issue)issues_Box.SelectedItem;
+            IList<TimeEntryActivity> list = rp.getActivitiesForProject(te.Issue.Project.Id.ToString());
+            activities_Box.ItemsSource = list;
+            activities_Box.SelectedIndex = 0; 
         }
     }
 }

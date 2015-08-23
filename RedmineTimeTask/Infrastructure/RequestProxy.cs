@@ -15,6 +15,7 @@ namespace RedmineTimeTask.Infrastructure
     {
         IList<Issue> _issues;
         IList<TimeEvent> _timeevents = new List<TimeEvent>();
+       // IList<TimeEntryActivity> _activities;
         RedmineManager manager;
 
         public IList<Issue> Issues
@@ -31,7 +32,7 @@ namespace RedmineTimeTask.Infrastructure
         }
         public void createManager()
         {
-            if (Properties.Settings.Default.Host.Length != 0 && Properties.Settings.Default.APIkey.Length != 0) {   
+            if (Properties.Settings.Default.Host.Length != 0 && Properties.Settings.Default.APIkey.Length != 0) {
                 this.manager = new RedmineManager(Properties.Settings.Default.Host, Properties.Settings.Default.APIkey);
             }
         }
@@ -43,13 +44,11 @@ namespace RedmineTimeTask.Infrastructure
                     var parameters = new NameValueCollection { { "assigned_to_id", "me" } };
                     parameters.Add("status_id", "open");
                     this.Issues = manager.GetObjectList<Issue>(parameters);
-                    TimeEntry t = new TimeEntry();
                 } 
                 catch (RedmineException e)
                 {
                     Console.WriteLine("ERROR : " + e.Message);
                 }
-
             }
         }
        
@@ -63,14 +62,29 @@ namespace RedmineTimeTask.Infrastructure
             {
                 te.Issue.SpentHours = (float)Math.Round((float)te.Timespan.TotalHours, 2);
             } */
-            te.Issue.SpentHours = te.Issue.SpentHours + 2.50F;
+            TimeEntry timeentry = new TimeEntry();
+            timeentry.Hours = Math.Round((decimal)te.Timespan.TotalHours, 2);
+            timeentry.Project = new IdentifiableName { Id = te.Issue.Project.Id };
+            timeentry.Activity = new IdentifiableName { Id = te.Activity };
+            timeentry.Comments = te.Comment;
+            timeentry.Issue = new IdentifiableName {Id = te.Issue.Id };
+
+            //manager.
             try
-            { 
-            manager.UpdateObject(te.Issue.Id.ToString(), (Issue)te.Issue);
+            {
+                manager.CreateObject(timeentry);
+            //manager.UpdateObject(timeentry.Id.ToString(), (TimeEntry)timeentry);
             } catch (RedmineException e)
             {
                 Console.WriteLine(e.Message);
             }
+        }
+
+        public IList<TimeEntryActivity> getActivitiesForProject(String project_id) {
+            var parameters = new NameValueCollection { { "project_id", project_id } };
+            //var parameters = new NameValueCollection{};
+            IList<TimeEntryActivity> list = manager.GetObjectList<TimeEntryActivity>(parameters);
+            return list;
         }
     }
 }

@@ -11,6 +11,8 @@ namespace RedmineTimeTask.Models
     {
         TimeSpan _timespan;
         Issue _issue;
+        int _activity;
+        string _comment;
 
 
         public TimeEvent(TimeSpan timespan, Issue issue)
@@ -42,6 +44,32 @@ namespace RedmineTimeTask.Models
             set
             {
                 _issue = value;
+            }
+        }
+
+        public string Comment
+        {
+            get
+            {
+                return _comment;
+            }
+
+            set
+            {
+                _comment = value;
+            }
+        }
+
+        public int Activity
+        {
+            get
+            {
+                return _activity;
+            }
+
+            set
+            {
+                _activity = value;
             }
         }
     }

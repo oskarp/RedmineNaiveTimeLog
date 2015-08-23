@@ -27,7 +27,7 @@ namespace RedmineTimeTask
         private void button_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Save();
-            SettingSaveStatus.Text = "Saved!";
+            this.Close();
         }
     }
 }
