@@ -19,6 +19,7 @@ using Redmine.Net.Api;
 using Redmine.Net.Api.Types;
 using System.Collections;
 using RedmineTimeTask.Infrastructure;
+using RedmineTimeTask.Models;
 
 namespace RedmineTimeTask
 {
@@ -28,12 +29,14 @@ namespace RedmineTimeTask
     public partial class MainWindow : Window
     {
         RequestProxy rp = new RequestProxy();
+        Timer timer = new Timer();
 
         public MainWindow()
         {
             InitializeComponent();
 
             // Put on its own thread later. 
+            rp.createManager();
             rp.fetchIssues();
             issues_ListBox.ItemsSource = rp.Issues;
 
@@ -52,11 +55,26 @@ namespace RedmineTimeTask
 
         private void startWatch_Menu(object sender, RoutedEventArgs e)
         {
-            
+            //Console.WriteLine(sender.ToString());
+            MenuItem item = (System.Windows.Controls.MenuItem)sender;
+            if((string)item.Header == "_Start Timer") {
+                item.Header = "_Stop Timer";
+                this.timer.start();
+            } else if((string)item.Header == "_Stop Timer")
+            {
+                SubmitTime subWindow = new SubmitTime();
+                subWindow.Rp = this.rp;
+                subWindow.Te = new TimeEvent(timer.getTimeSpan(), null);
+                subWindow.Show();
+                item.Header = "_Start Timer";
+            }
+
+
         }
 
         private void ForceRefresh_Menu(object sender, RoutedEventArgs e)
         {
+            rp.createManager();
             rp.fetchIssues();
             issues_ListBox.ItemsSource = rp.Issues;
 

@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RedmineTimeTask"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="600">
-
+        Title="RedmineNaiveTimereporter" Height="450" Width="600"
+        WindowStyle="ToolWindow"
+        ResizeMode="CanResizeWithGrip"
+        >
+        
     <Grid>
 
 
@@ -14,8 +17,10 @@
             <Menu DockPanel.Dock="Top" Background="#FFC3C3C3">
                 <MenuItem Header="_Menu">
                     <MenuItem Header="_Settings" Click="settings_Menu"/>
-                    <MenuItem Header="_About" Click="about_Menu"/>
+                    <MenuItem Header="_Start Timer" Click="startWatch_Menu"  />
                     <MenuItem Header="_Force Refresh" Click="ForceRefresh_Menu"/>
+                    <MenuItem Header="_About" Click="about_Menu"/>
+
                 </MenuItem>
             </Menu>
             <ListBox x:Name="issues_ListBox" ItemsSource="{Binding}"  Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Top" BorderThickness="0">
