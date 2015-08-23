@@ -1,0 +1,17 @@
+﻿<Window x:Class="RedmineTimeTask.SubmitTime"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RedmineTimeTask"
+        mc:Ignorable="d"
+        Title="SubmitTime" Height="191" Width="300">
+    <Grid Margin="0,0,0,4">
+        <TextBox x:Name="hours_box" HorizontalAlignment="Left" Height="23" Margin="83,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="199"/>
+        <ComboBox x:Name="issues_Box" HorizontalAlignment="Left" Margin="83,48,0,0" VerticalAlignment="Top" Width="199" Loaded="issues_BoxLoaded" DisplayMemberPath="Subject"/>
+        <Label x:Name="label" Content="Issue" HorizontalAlignment="Left" Margin="8,48,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy" Content="Hours spent" HorizontalAlignment="Left" Margin="8,84,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="button" Content="Submit" HorizontalAlignment="Left" Margin="207,125,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+
+    </Grid>
+</Window>
