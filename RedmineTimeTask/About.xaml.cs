@@ -31,9 +31,7 @@ namespace RedmineTimeTask
 
             // Add paragraphs to the FlowDocument.
 
-            Hyperlink icons4androidLink = new Hyperlink();
-            icons4androidLink.Inlines.Add("icons4android");
-            icons4androidLink.NavigateUri = new Uri("http://www.icons4android.com/iconset/15");
+
 
             Hyperlink oskarGithub = new Hyperlink();
             oskarGithub.Inlines.Add("github");
@@ -55,10 +53,6 @@ namespace RedmineTimeTask
             redminePa.Inlines.Add(" for the redmine communication.");
             myFlowDoc.Blocks.Add(redminePa);
 
-            Paragraph icoPa = new Paragraph();
-            icoPa.Inlines.Add("Icons from");
-            icoPa.Inlines.Add(icons4androidLink);
-            myFlowDoc.Blocks.Add(icoPa);
             // Add initial content to the RichTextBox.
             aboutBox.Document = myFlowDoc;
         }
