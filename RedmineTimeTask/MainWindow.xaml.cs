@@ -30,6 +30,8 @@ namespace RedmineTimeTask
     {
         RequestProxy rp = new RequestProxy();
         Timer timer = new Timer();
+        Image playImage = new Image { Source = new BitmapImage(new Uri("Resources/Icons/start.png", UriKind.Relative)), VerticalAlignment = VerticalAlignment.Center };
+        Image stopImage = new Image { Source = new BitmapImage(new Uri("Resources/Icons/stop.png", UriKind.Relative)), VerticalAlignment = VerticalAlignment.Center };
 
         public MainWindow()
         {
@@ -39,6 +41,13 @@ namespace RedmineTimeTask
             rp.createManager();
             rp.fetchIssues();
             issues_ListBox.ItemsSource = rp.Issues;
+            if(issues_ListBox.Items.Count != 0)
+            {
+                issues_ListBox.SelectedIndex = 0;
+            } else
+            {
+                timerLabel.Content = "Got no issues.";
+            }
 
         }
 
@@ -59,6 +68,7 @@ namespace RedmineTimeTask
             MenuItem item = (System.Windows.Controls.MenuItem)sender;
             if((string)item.Header == "_Start Timer") {
                 item.Header = "_Stop Timer";
+
                 this.timer.start();
             } else if((string)item.Header == "_Stop Timer")
             {
@@ -67,6 +77,29 @@ namespace RedmineTimeTask
                 subWindow.Te = new TimeEvent(timer.getTimeSpan(), null);
                 subWindow.Show();
                 item.Header = "_Start Timer";
+            }
+
+
+        }
+
+        private void startWatch_Button(object sender, RoutedEventArgs e)
+        {
+            Issue selectedIssue = (Issue)issues_ListBox.SelectedItem;
+            if (!timer.Activated)
+            {
+                this.timer.start();
+                timerLabel.Content = "Tracking " + selectedIssue.Subject;
+                timerButton.Content = "Stop tracking";
+            }
+            else if (timer.Activated)
+            {
+                SubmitTime subWindow = new SubmitTime();
+                subWindow.Rp = this.rp;
+                subWindow.Te = new TimeEvent(timer.getTimeSpan(), (Issue)issues_ListBox.SelectedItem);
+                subWindow.Show();
+                timerButton.Content = "Start tracking";
+                timerLabel.Content = "";
+                timer.Activated = false;
             }
 
 

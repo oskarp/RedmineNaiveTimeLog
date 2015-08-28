@@ -2,6 +2,7 @@
 using RedmineTimeTask.Infrastructure;
 using RedmineTimeTask.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,17 +34,18 @@ namespace RedmineTimeTask
         }
         public void issues_BoxLoaded(object sender, RoutedEventArgs e)
         {
-
-            issues_Box.ItemsSource = rp.Issues;
+            if(te.Issue != null)
+            {
+                IList tempIssuesList = new List<Issue>();
+                tempIssuesList.Add(te.Issue);
+                issues_Box.ItemsSource = tempIssuesList;
+                issues_Box.SelectedIndex = 0;
+                updateActivitiesBox();
+            } else { 
+                issues_Box.ItemsSource = rp.Issues;
+            }
             hours_box.Text = Math.Round((decimal)te.Timespan.TotalHours, 3).ToString();
-
-            //fhours_box.Text = te.Timespan.TotalHours.ToString();
-        }
-
-        public void activities_BoxLoaded(object sender, RoutedEventArgs e) {
-
-            // activities_Box.ItemsSource = rp.getActivitiesForProject
-        }
+        } 
 
         internal RequestProxy Rp
         {
@@ -83,10 +85,14 @@ namespace RedmineTimeTask
 
         private void issues_Box_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            updateActivitiesBox();
+        }
+
+        private void updateActivitiesBox() {
             te.Issue = (Issue)issues_Box.SelectedItem;
             IList<TimeEntryActivity> list = rp.getActivitiesForProject(te.Issue.Project.Id.ToString());
             activities_Box.ItemsSource = list;
-            activities_Box.SelectedIndex = 0; 
+            activities_Box.SelectedIndex = 0;
         }
     }
 }

@@ -9,10 +9,25 @@ namespace RedmineTimeTask.Models
     class Timer
     {
         DateTime startTime;
+        bool activated = false;
+
+        public bool Activated
+        {
+            get
+            {
+                return activated;
+            }
+
+            set
+            {
+                activated = value;
+            }
+        }
 
         public void start()
         {
             this.startTime = DateTime.Now;
+            this.activated = true;
         }
 
         public String getTimeSpent()
