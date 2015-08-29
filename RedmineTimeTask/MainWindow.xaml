@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RedmineTimeTask"
         mc:Ignorable="d"
-        Title="RedmineNaiveTimereporter" Height="Auto" Width="Auto" SizeToContent="WidthAndHeight"
+        Title="Redmine Naive Time Log" Height="Auto" Width="Auto" SizeToContent="WidthAndHeight"
+        MinWidth="250"
         WindowStyle="SingleBorderWindow"
         ResizeMode="NoResize"
         >
