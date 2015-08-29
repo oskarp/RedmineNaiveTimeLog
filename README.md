@@ -21,7 +21,7 @@ On first run, go to settings and define the URL to your Redmine installation. Yo
 
 ## Screenshot
 
-![http://oskarp.github.io/images/rntl_ui.png](Screenshot of the ui)
+![App UI](http://oskarp.github.io/images/rntl_ui.png)
 
 ## Dependencies
 
